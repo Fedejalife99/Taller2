@@ -1,4 +1,4 @@
-package Grafica.Objetos;
+package Logica.Objetos.VObjects;
 import java.time.LocalDate;
 
 public class VOVentaIngreso{

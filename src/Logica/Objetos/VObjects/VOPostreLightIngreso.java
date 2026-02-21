@@ -1,5 +1,5 @@
-package Grafica.Objetos;
-import Grafica.Objetos.VOPostreIngreso;
+package Logica.Objetos.VObjects;
+import Logica.Objetos.VObjects.VOPostreIngreso;
 
 public class VOPostreLightIngreso extends VOPostreIngreso{
 	private String endulzante;

@@ -1,4 +1,4 @@
-package Grafica.Objetos;
+package Logica.Objetos.VObjects;
 
 public class VOPostreIngreso {
 	private String codigo;
