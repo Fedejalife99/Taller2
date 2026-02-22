@@ -1,6 +1,7 @@
 package Logica.Postres;
-import Logica.Objetos.VOPostreGeneral;
 import java.util.*;
+
+import Logica.Objetos.VObjects.VOPostreGeneral;
 
 public class ColeccionPostres{
     private TreeMap<String, Postre> ABB;
@@ -9,14 +10,14 @@ public class ColeccionPostres{
         ABB  = new TreeMap<>();
     }
     
-    public boolean member (String clave)
+    public boolean member (String codigo)
     { 
-    	return ABB.containsKey(clave); 
+    	return ABB.containsKey(codigo); 
     }
 
-    public void insert (String clave, Postre p)
+    public void insert (Postre p)
     {
-    	ABB.put(clave, p);
+    	ABB.put(p.getCodigo(), p);
     }
     
     public Postre find (String clave)

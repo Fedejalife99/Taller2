@@ -1,10 +1,11 @@
 package Logica.Postres;
+import Logica.Objetos.TipoPostre;
 
 public class Postre {
 	String codigo;
 	String nombre;
-	float precioUnitario;
-	public Postre(String cod, String nom, float pre)
+	double precioUnitario;
+	public Postre(String cod, String nom, double pre)
 	{
 		this.codigo = cod;
 		this.nombre = nom;
@@ -24,11 +25,11 @@ public class Postre {
 		this.nombre = nombre;
 	}
 
-	public float getPrecioUnitario() {
+	public double getPrecioUnitario() {
 		return precioUnitario;
 	}
 
-	public void setPrecioUnitario(float precioUnitario) {
+	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
 
@@ -36,9 +37,9 @@ public class Postre {
 		this.codigo = codigo;
 	}
 	
-	public String darTipo()
+	public TipoPostre darTipo()
 	{
-		return "Comun";
+		return TipoPostre.COMUN;
 	}
 	
 }

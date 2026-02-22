@@ -1,19 +1,21 @@
 package Logica.Objetos;
+import Logica.Objetos.VObjects.VOVentaIngreso;
+import java.time.LocalDate;
 
 public class VOVenta extends VOVentaIngreso{
 	
-	private String numeroVenta;
+	private int numeroVenta;
 	private double montoTotal;
 	private boolean finalizado;
 	
-	public VOVenta(String numeroVenta, double montoTotal, boolean finalizado) {
-		super();
+	public VOVenta(LocalDate fechaVenta, String dirEntrega, int numeroVenta, double montoTotal, boolean finalizado) {
+		super(fechaVenta, dirEntrega);
 		this.numeroVenta = numeroVenta;
 		this.montoTotal = montoTotal;
 		this.finalizado = finalizado;
 	}
 	
-	public String getNumeroVenta() {
+	public int getNumeroVenta() {
 		return numeroVenta;
 	}
 	

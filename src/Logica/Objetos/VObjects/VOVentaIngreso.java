@@ -6,7 +6,6 @@ public class VOVentaIngreso{
 	private String direccionEntrega;
 	
 	public VOVentaIngreso(LocalDate fechaVenta, String direccionEntrega) {
-		super();
 		this.fechaVenta = fechaVenta;
 		this.direccionEntrega = direccionEntrega;
 	}

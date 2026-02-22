@@ -1,7 +1,8 @@
 package Logica.Ventas;
-import Logica.Ventas.Venta;
+
 
 import Logica.Objetos.VOVenta;
+import Logica.Objetos.TipoIndice;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,28 +33,45 @@ public class ColeccionVentas {
     }
 
     
-    public List<VOVenta> listarVentas(String indic)
+    public List<VOVenta> listarVentas(TipoIndice indic)
     {
         List<VOVenta> listaVO = new ArrayList<>();
-        
-        switch(indic)
-        {
-	        case "T":
-	        		for(Venta v: LPPF)
-	        		{
-	        			listaVO.add(new VOVenta(v.getNumeroVenta(),
-	        					v.getFecha(),
-	        					v.getDirEntrega(),
-	        					v.getTotal(),
-	        					v.getFinalizado()));
-	        		}
-	        	break;
-	        case "P":
-	        	break;
-	        case "F":
-	        	break;
+	     for(Venta v: LPPF)
+	     {
+	    	 
+	    	 if(indic == TipoIndice.T)
+	    	 {
+	        	listaVO.add(new VOVenta(v.getFecha(),v.getDireccion(),v.getNumeroVenta(),
+	      				v.getTotal(),
+	  					v.isFinalizado()));
+	    	 }
+	    	 else if(indic == TipoIndice.P)
+	    	 {
+	    		 if(!v.isFinalizado())
+	    		 {
+	    			 listaVO.add(new VOVenta(v.getFecha(),v.getDireccion(),v.getNumeroVenta(),
+	 	      				v.getTotal(),
+	 	  					v.isFinalizado()));
+	    		 }
+	    		 
+	    	 }
+	    	 else
+	    	 {
+	    		 if(v.isFinalizado())
+	    		 {
+	    			 listaVO.add(new VOVenta(v.getFecha(),v.getDireccion(),v.getNumeroVenta(),
+		 	      				v.getTotal(),
+		 	  					v.isFinalizado()));
+	    		 }
+	    	 }
+	    	 
         }
+	     return listaVO;
 
+    }
+    public int Largo()
+    {
+    	return LPPF.size();
     }
 	
 

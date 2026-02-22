@@ -1,73 +1,56 @@
 package Logica.Ventas;
 import java.time.LocalDate;
+import Logica.Objetos.SecCantPostres;
 
 
 public class Venta {
-	int numeroVenta;
-	LocalDate Fecha;
-	String direccion;
-	double total;
-	boolean finalizado;
-	//AGREGAR SECCANTPOSTRES
-	public Venta(int numeroVenta, String direccion, float total, boolean finalizado) 
+	private int numeroVenta;
+	private LocalDate Fecha;
+	private String direccion;
+	private double total;
+	private boolean finalizado;
+	private SecCantPostres sec;
+	public Venta(String direccion, int numeroVenta) 
 	{
 		this.numeroVenta = numeroVenta;
 		Fecha = LocalDate.now();
 		this.direccion = direccion;
-		this.total = total;
-		this.finalizado = finalizado;
 	}
-	
-	public int getNumeroVenta()
-	{
+	public int getNumeroVenta() {
 		return numeroVenta;
 	}
-	
-	public LocalDate getFecha()
-	{
+	public void setNumeroVenta(int numeroVenta) {
+		this.numeroVenta = numeroVenta;
+	}
+	public LocalDate getFecha() {
 		return Fecha;
 	}
-	
-	public String getDirEntrega()
-	{
+	public void setFecha(LocalDate fecha) {
+		Fecha = fecha;
+	}
+	public String getDireccion() {
 		return direccion;
 	}
-	
-	public double getTotal()
-	{
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public double getTotal() {
 		return total;
 	}
-	
-	public boolean getFinalizado()
-	{
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public boolean isFinalizado() {
 		return finalizado;
 	}
-	
-	public void setNumeroVenta(int numVenta)
-	{
-		numeroVenta = numVenta;
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
 	}
-	
-	public void setFecha(LocalDate F)
-	{
-		Fecha = F;
+	public SecCantPostres getSec() {
+		return sec;
 	}
-	
-	public void setDirEntrega(String dir)
-	{
-		direccion = dir;
+	public void setSec(SecCantPostres sec) {
+		this.sec = sec;
 	}
-	
-	public void setTotal(double t)
-	{
-		total = t;
-	}
-	
-	public void setFinalizado(boolean f)
-	{
-		finalizado = f;
-	}
-	
-	
 
 }

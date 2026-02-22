@@ -1,0 +1,117 @@
+!SESSION 2026-02-21 11:57:26.348 -----------------------------------------------
+eclipse.buildId=4.38.0.20251204-0849
+java.version=21.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=es_419
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/fede/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.java.product -keyring /Users/fede/.eclipse_keyring -data /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+
+!ENTRY ch.qos.logback.classic 1 0 2026-02-21 11:57:27.773
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2026-02-21 11:57:29.029
+!MESSAGE Logback config file: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.101.20251017-1242.xml
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-02-21 12:00:16.150
+!MESSAGE Invalid project description for project 'src' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria/src' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'src' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria/src' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-02-21 12:00:16.151
+!MESSAGE Invalid project description for project 'src' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria/src' 
+!SUBENTRY 2 unknown 0 0 2026-02-21 12:00:16.151
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-02-21 12:00:16.151
+!MESSAGE /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-02-21 12:00:24.827
+!MESSAGE Invalid project description for project 'Taller II - UDE' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'Taller II - UDE' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-02-21 12:00:24.827
+!MESSAGE Invalid project description for project 'Taller II - UDE' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria' 
+!SUBENTRY 2 unknown 0 0 2026-02-21 12:00:24.827
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-02-21 12:00:24.827
+!MESSAGE /Users/fede/Desktop/Facultad 2024-2025/Pasteleria overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-02-21 12:00:31.653
+!MESSAGE Invalid project description for project 'Taller II - UDE' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'Taller II - UDE' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-02-21 12:00:31.653
+!MESSAGE Invalid project description for project 'Taller II - UDE' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria' 
+!SUBENTRY 2 unknown 0 0 2026-02-21 12:00:31.653
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-02-21 12:00:31.653
+!MESSAGE /Users/fede/Desktop/Facultad 2024-2025/Pasteleria overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+
+!ENTRY org.eclipse.egit.ui 4 0 2026-02-21 12:00:39.694
+!MESSAGE Invalid project description for project 'src' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria/src' 
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Invalid project description for project 'src' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria/src' 
+	at org.eclipse.core.internal.resources.Project.checkDescription(Project.java:219)
+	at org.eclipse.core.internal.resources.Project.assertCreateRequirements(Project.java:95)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:316)
+	at org.eclipse.core.internal.resources.Project.create(Project.java:302)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createExistingProject(ProjectUtils.java:179)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils$1.run(ProjectUtils.java:104)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2505)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2528)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:138)
+	at org.eclipse.egit.ui.internal.clone.ProjectUtils.createProjects(ProjectUtils.java:62)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard.importProjects(GitImportWizard.java:254)
+	at org.eclipse.egit.ui.internal.clone.GitImportWizard$4.run(GitImportWizard.java:206)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+Contains: OK
+Contains: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2026-02-21 12:00:39.694
+!MESSAGE Invalid project description for project 'src' at 'file:/Users/fede/Desktop/Facultad%202024-2025/Pasteleria/src' 
+!SUBENTRY 2 unknown 0 0 2026-02-21 12:00:39.694
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.core.resources 4 77 2026-02-21 12:00:39.694
+!MESSAGE /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src overlaps the workspace location: /Users/fede/Desktop/Facultad 2024-2025/Pasteleria/src

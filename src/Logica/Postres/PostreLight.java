@@ -1,5 +1,7 @@
 package Logica.Postres;
 
+import Logica.Objetos.TipoPostre;
+
 public class PostreLight extends Postre{
 
 
@@ -29,8 +31,8 @@ public class PostreLight extends Postre{
 		this.descripcion = descripcion;
 	}
 	
-	public String darTipo()
+	public TipoPostre darTipo()
 	{
-		return "Light";
+		return TipoPostre.LIGHT;
 	}
 }
