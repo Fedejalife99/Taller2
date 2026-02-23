@@ -16,6 +16,7 @@ public class Venta {
 		this.numeroVenta = numeroVenta;
 		Fecha = LocalDate.now();
 		this.direccion = direccion;
+		this.sec = new SecCantPostres();
 	}
 	public int getNumeroVenta() {
 		return numeroVenta;

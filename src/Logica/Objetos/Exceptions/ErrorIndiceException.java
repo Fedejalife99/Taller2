@@ -5,7 +5,7 @@ public class ErrorIndiceException extends Exception{
 	
 	public ErrorIndiceException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje()

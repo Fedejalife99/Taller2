@@ -5,7 +5,7 @@ public class PrecioPostreException extends Exception {
 	
 	public PrecioPostreException (String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje()

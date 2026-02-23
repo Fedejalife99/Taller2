@@ -6,7 +6,7 @@ public class NoHayPostresException extends Exception{
 	
 	public NoHayPostresException (String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje()

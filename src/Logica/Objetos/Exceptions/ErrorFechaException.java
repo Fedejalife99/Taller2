@@ -5,7 +5,7 @@ public class ErrorFechaException extends Exception{
 	
 	public ErrorFechaException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje() 

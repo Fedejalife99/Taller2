@@ -8,7 +8,7 @@ public class PostreLight extends Postre{
 	private String endulzante;
 	private String descripcion;
 	
-	public PostreLight(String cod, String nom, float pre, String end, String desc) {
+	public PostreLight(String cod, String nom, double pre, String end, String desc) {
 		super(cod, nom, pre);
 		this.endulzante = end;
 		this.descripcion = desc;

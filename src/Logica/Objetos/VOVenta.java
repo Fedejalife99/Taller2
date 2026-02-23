@@ -9,7 +9,7 @@ public class VOVenta extends VOVentaIngreso{
 	private boolean finalizado;
 	
 	public VOVenta(LocalDate fechaVenta, String dirEntrega, int numeroVenta, double montoTotal, boolean finalizado) {
-		super(fechaVenta, dirEntrega);
+		super(dirEntrega);
 		this.numeroVenta = numeroVenta;
 		this.montoTotal = montoTotal;
 		this.finalizado = finalizado;

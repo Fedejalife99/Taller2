@@ -1,0 +1,10 @@
+/CantidadUnidadesException.class
+/DireccionErroneaException.class
+/ErrorFechaException.class
+/ErrorIndiceException.class
+/FechaInvalidaException.class
+/NoHayPostresException.class
+/PostreNoExisteException.class
+/PrecioPostreException.class
+/VentaFinalizadaException.class
+/VentaNoExisteException.class

@@ -90,7 +90,7 @@ public class ColeccionVentas {
     
     public void eliminarVenta(int numVenta)
     {
-    	LPPF.remove(numVenta);
+    	LPPF.remove(numVenta - 1);
     }
 
 }

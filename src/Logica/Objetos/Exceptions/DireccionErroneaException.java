@@ -6,7 +6,7 @@ public class DireccionErroneaException extends Exception{
 	
 	public DireccionErroneaException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje() 

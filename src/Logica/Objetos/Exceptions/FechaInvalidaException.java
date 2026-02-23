@@ -5,7 +5,7 @@ public class FechaInvalidaException extends Exception{
 	
 	public FechaInvalidaException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje() 

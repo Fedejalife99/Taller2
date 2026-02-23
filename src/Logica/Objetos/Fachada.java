@@ -17,24 +17,26 @@ public class Fachada {
 		this.postres = new ColeccionPostres();
 		this.ventas = new ColeccionVentas();
 	}
-	public void IngresarPostre(VOPostreIngreso datosPostre) throws PrecioPostreException, PostreNoExisteException
+	public void IngresarPostre(VOPostreIngreso datosPostre) throws PrecioPostreException
 	{
-		if(datosPostre.getPrecioUnitario()<=0)
-		{
-			throw new PrecioPostreException("El precio del postre es menor o igual a 0.");
-		}
-		else
-		{
-			if(!postres.member(datosPostre.getCodigo()))
-			{
-				throw new PostreNoExisteException("El postre ya está registrado en el sistema.");
-			}
-			else
-			{				
-				Postre nuevo = new Postre(datosPostre.getCodigo(), datosPostre.getNombre(), datosPostre.getPrecioUnitario());
-				postres.insert(nuevo);	
-			}
-		}
+	    if(datosPostre.getPrecioUnitario() <= 0)
+	    {
+	        throw new PrecioPostreException("El precio del postre es menor o igual a 0.");
+	    }
+	    else
+	    {
+	        if(datosPostre instanceof VOPostreLightIngreso)
+	        {
+	            VOPostreLightIngreso datosLight = (VOPostreLightIngreso) datosPostre;
+	            PostreLight nuevo = new PostreLight(datosLight.getCodigo(), datosLight.getNombre(), datosLight.getPrecioUnitario(), datosLight.getEndulzante(), datosLight.getDescripcion());
+	            postres.insert(nuevo);
+	        }
+	        else
+	        {
+	            Postre nuevo = new Postre(datosPostre.getCodigo(), datosPostre.getNombre(), datosPostre.getPrecioUnitario());
+	            postres.insert(nuevo);
+	        }
+	    }
 	}
 	
 	public List<VOPostreGeneral> listarPostresGral() throws NoHayPostresException
@@ -65,14 +67,6 @@ public class Fachada {
 	
 	public void IngresarVenta(VOVentaIngreso v) throws ErrorFechaException// A consultar este procedimiento porque según el desglose tenemos que tener la secuencia de ventas, y acá hay un VO.
 	{
-		LocalDate fecVIngreso = v.getFechaVenta();
-		
-		if(fecVIngreso.isBefore(ventas.obtenerUltimaVenta().getFecha()))
-		{
-			throw new ErrorFechaException("La fecha es menor a la de la última fecha registrada.");
-		}
-		else
-		{
 			Venta nueva = null;
 			if(ventas.Largo()==0)
 			{
@@ -84,10 +78,9 @@ public class Fachada {
 			}
 			nueva.setFinalizado(false);
 			ventas.insBack(nueva);
-		}
 	}
 	
-	public void agregarPostreVenta(String codigoPostre, int cantUnidades, int numVenta) throws PostreNoExisteException, VentaNoExisteException, CantidadUnidadesException 
+	public void agregarPostreVenta(String codigoPostre, int cantUnidades, int numVenta) throws PostreNoExisteException, VentaNoExisteException, CantidadUnidadesException, VentaFinalizadaException
 	{
 		
 		if (!postres.member(codigoPostre)) {
@@ -98,6 +91,10 @@ public class Fachada {
 		if (aux == null) {
 			throw new VentaNoExisteException("El número de venta no es correcto.");
 		}
+		if(aux.isFinalizado())
+		{
+			throw new VentaFinalizadaException("No se pueden agregar postres a esta venta porque fue finalizada");
+		}
 		
 		if (cantUnidades <= 0 || cantUnidades > 40) {
 			throw new CantidadUnidadesException("La cantidad de postres debe estar entre 1 y 40.");
@@ -105,28 +102,33 @@ public class Fachada {
 		
 		int totalActual = aux.getSec().darCantidadTotalPostres();
 		
-		if (totalActual >= 40) {
+		if (totalActual == 40) {
 			throw new CantidadUnidadesException("No se pueden agregar más postres. La venta ya tiene 40.");
 		}
 		
 		int nuevoTotal = totalActual + cantUnidades;
 		
 		if (aux.getSec().ExistePostreEnSec(codigoPostre)) {
-			
-			if (nuevoTotal > 40) {
-				aux.getSec().SetCantPostre(codigoPostre, 40);
-				throw new CantidadUnidadesException("Se limitó la cantidad total a 40 unidades.");
-			}
-			
-			aux.getSec().SetCantPostre(codigoPostre, nuevoTotal);
-			
+
+		    if (nuevoTotal > 40) {
+		        aux.getSec().SetCantPostre(codigoPostre, 40);
+		        throw new CantidadUnidadesException("Se limitó la cantidad total a 40 unidades.");
+		    }
+
+		    aux.getSec().SetCantPostre(codigoPostre, nuevoTotal);
+		    double precio = postres.find(codigoPostre).getPrecioUnitario();
+		    aux.setTotal(aux.getTotal() + precio * cantUnidades);
+
 		} else {
-			
-			if (nuevoTotal > 40) {
-				throw new CantidadUnidadesException("No se pueden agregar más de 40 postres a una venta.");
-			}
-			
-			aux.getSec().SetCantPostre(codigoPostre, cantUnidades);
+
+		    if (nuevoTotal > 40) {
+		        throw new CantidadUnidadesException("No se pueden agregar más de 40 postres a una venta.");
+		    }
+
+		    Postre p = postres.find(codigoPostre);
+		    CantPostre cantp = new CantPostre(p, nuevoTotal);
+		    aux.getSec().insBack(cantp);
+		    aux.setTotal(aux.getTotal() + p.getPrecioUnitario() * cantUnidades);
 		}
 	}
 	
@@ -161,15 +163,11 @@ public class Fachada {
 						 int i = 0;
 						 boolean encontre = false;
 						 SecCantPostres auxSec = aux.getSec();
-						 
-						 if(auxSec.ExistePostreEnSec(codPos))
-						 {
-							 
 							 while(i<auxSec.Largo() && !encontre)
 							 {
 								 CantPostre cp = auxSec.darCantPostre(i);
 								 
-								 if(cp.getPostre().getCodigo() == codPos)
+								 if(cp.getPostre().getCodigo().equals(codPos))
 								 {
 									 if(cp.getCantidad() < cant)
 									 {
@@ -186,17 +184,13 @@ public class Fachada {
 										 }
 										 else
 										 {
-											 // Falta eliminar el postre de la venta.
+											 auxSec.ExistePostreEnSec(codPos);
 										 }
 										 
 									 }
+									 encontre=true;
 								 }
 							 }
-						 }
-						 else
-						 {
-							 throw new PostreNoExisteException("El postre no existe.");
-						 }
 					}
 				}
 			}
@@ -206,42 +200,33 @@ public class Fachada {
 	
 	public double finalizarVenta(int numVenta, boolean cancela) throws VentaNoExisteException, VentaFinalizadaException
 	{
-		double total = 0;
-		
-		if(ventas.obtenerPorNum(numVenta)==null)
-		{
-			throw new VentaNoExisteException("La venta con el nro indicado no existe.");
-		}
-		else
-		{
-			Venta aux = ventas.obtenerPorNum(numVenta);
-			
-			if(aux.isFinalizado())
-			{
-				throw new VentaFinalizadaException("No se puede modificar una venta finalizada.");
-			}
-			else
-			{
-				if(aux.getSec().darCantidadTotalPostres()==0)
-				{
-					ventas.eliminarVenta(numVenta);
-				}
-				else
-				{
-					if(cancela)
-					{
-						ventas.eliminarVenta(numVenta);
-					}
-					else
-					{
-						aux.setFinalizado(true);
-						total = aux.getTotal();
-					}
-				}
-			}
-		}
-		
-		return total;
+	    double total = 0;
+	    Venta aux = ventas.obtenerPorNum(numVenta);
+	    System.out.println("Total en finalizarVenta: " + aux.getTotal());
+
+	    if(aux == null)
+	    {
+	        throw new VentaNoExisteException("La venta con el nro indicado no existe.");
+	    }
+	    else if(aux.isFinalizado())
+	    {
+	        throw new VentaFinalizadaException("No se puede modificar una venta finalizada.");
+	    }
+	    else
+	    {
+	        if(aux.getSec().darCantidadTotalPostres() == 0 || cancela)
+	        {
+	            ventas.eliminarVenta(numVenta);
+	        }
+	        else
+	        {
+	            aux.setFinalizado(true);
+	            System.out.println("Total al finalizar: " + aux.getTotal());
+	            total = aux.getTotal();
+	        }
+	    }
+
+	    return total;
 	}
 	
 	public List<VOVenta> listarVentasIndic(TipoIndice indice) throws ErrorIndiceException

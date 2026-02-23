@@ -1,4 +1,5 @@
 package Logica.Objetos;
+import Logica.Objetos.Exceptions.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import Logica.Objetos.CantPostre;
@@ -10,7 +11,9 @@ public class SecCantPostres{
 	private ArrayList<CantPostre> ACT;
 	
 	public SecCantPostres()
-	{}
+	{
+		this.ACT =  new ArrayList<CantPostre>();
+	}
 	public int Largo()
 	{
 		return ACT.size();
@@ -63,37 +66,29 @@ public class SecCantPostres{
 		return total;
 	}
 	
-	public void SetCantPostre(String codigo, int cant)
+	public void SetCantPostre(String cod, int cant)
 	{
-		int i=0;
-		while(i < ACT.size() && codigo != ACT.get(i).getPostre().getCodigo())
-		{
-			i++;
-		}
-		if(codigo == ACT.get(i).getPostre().getCodigo())
-		{
-			ACT.get(i).setCantidad(cant);
-		}
+	    int i = 0;
+	    while(i < ACT.size() && !ACT.get(i).getPostre().getCodigo().equals(cod))
+	    {
+	        i++;
+	    }
+	    if(i < ACT.size())
+	    {
+	        ACT.get(i).setCantidad(cant);
+	    }
 	}
 	
-	public void eliminarCantPostre(String codigo, int cant)
+	public void eliminar(int i)
 	{
-		int i=0;
-		while(i < ACT.size() && codigo != ACT.get(i).getPostre().getCodigo())
-		{
-			i++;
-		}
-		if(codigo == ACT.get(i).getPostre().getCodigo())
-		{
-			ACT.remove(i);
-		}
+		ACT.remove(i);
 	}
 	public boolean ExistePostreEnSec(String cod)
 	{
 		boolean existe = false;
 		for(CantPostre cp: ACT)
 		{
-			if(cp.getPostre().getCodigo() == cod)
+			if(cp.getPostre().getCodigo().equals(cod))
 			{
 				existe = true;
 			}

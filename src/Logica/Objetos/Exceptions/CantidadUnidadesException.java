@@ -6,7 +6,7 @@ public class CantidadUnidadesException extends Exception{
 	
 	public CantidadUnidadesException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje()

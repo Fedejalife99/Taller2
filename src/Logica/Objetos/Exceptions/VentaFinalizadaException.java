@@ -5,7 +5,7 @@ public class VentaFinalizadaException extends Exception{
 	
 	public VentaFinalizadaException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje() 

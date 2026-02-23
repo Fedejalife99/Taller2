@@ -5,7 +5,7 @@ public class VentaNoExisteException extends Exception {
 	
 	public VentaNoExisteException(String msj)
 	{
-		mensaje = msj;
+		super(msj);
 	}
 	
 	public String darMensaje()
