@@ -1,13 +1,14 @@
 package Logica.Postres;
 import java.util.TreeMap;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
 import Logica.Objetos.VObjects.VOPostreGeneral;
 
-public class ColeccionPostres{
+public class ColeccionPostres implements Serializable{
     private TreeMap<String, Postre> ABB;
-
+    private static final long serialVersionUID = 1L;
     public ColeccionPostres(){
         ABB  = new TreeMap<>();
     }

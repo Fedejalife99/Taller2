@@ -1,10 +1,12 @@
 package Logica.Postres;
 import Logica.Objetos.TipoPostre;
+import java.io.Serializable;
 
-public class Postre {
-	String codigo;
-	String nombre;
-	double precioUnitario;
+public class Postre implements Serializable{
+	private String codigo;
+	private String nombre;
+	private double precioUnitario;
+	private static final long serialVersionUID = 1L;
 	public Postre(String cod, String nom, double pre)
 	{
 		this.codigo = cod;
