@@ -1,4 +1,5 @@
 package Logica.Ventas;
+import Logica.Objetos.CantPostre;
 import java.time.LocalDate;
 import Logica.Objetos.SecCantPostres;
 
@@ -48,11 +49,42 @@ public class Venta {
 	public void setFinalizado(boolean finalizado) {
 		this.finalizado = finalizado;
 	}
-	public SecCantPostres getSec() {
-		return sec;
+	public int darCantPostres()
+	{
+		return this.sec.darCantidadTotalPostres();
 	}
-	public void setSec(SecCantPostres sec) {
-		this.sec = sec;
+	public void setCantidadPostre(String cod, int cant)
+	{
+		sec.SetCantPostre(cod, cant);
+	}
+	public boolean existePostreEnVenta(String cod)
+	{
+		return sec.ExistePostreEnSec(cod);
+	}
+	public void insertarCantPostre(CantPostre cp)
+	{
+		sec.insBack(cp);
+	}
+	public int  LargoSecuencia()
+	{
+		return sec.Largo();
 	}
 	
+	public CantPostre CantPostreIndice(int indice)
+	{
+		return sec.darCantPostre(indice);
+	}
+	public void eliminarPostreVenta(int indice)
+	{
+		sec.eliminar(indice);
+	}
+	public double darMontoPostre(String codigo, LocalDate fec)
+	{
+		return sec.recaudadoPorPostre(codigo, fec);
+	}
+	
+	public int darCantidadPostreVenta(String codigo)
+	{
+		 return sec.CantidadTotalPostre(codigo);
+	}
 }
