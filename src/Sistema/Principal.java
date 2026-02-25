@@ -17,7 +17,14 @@ public class Principal
     public static void main(String[] args)
     {
         Principal p = new Principal();
-
+        try
+        {
+            p.f.RecuperarDatos();
+        }
+        catch (PersistenciaException e)
+        {
+            System.out.println("No se pudieron recuperar los datos: " + e.getMessage());
+        }
         // ── PRUEBA 1: Ingresar postres ────────────────────────────
         System.out.println("=== PRUEBA 1: Ingresar postres ===");
         try
@@ -194,6 +201,15 @@ public class Principal
         catch (PostreNoExisteException | FechaInvalidaException e)
         {
             System.out.println("OK: Fecha invalida detectada: " + e.getMessage());
+        }
+        try
+        {
+            p.f.RespaldarDatos();
+            System.out.println("OK: Datos guardados correctamente.");
+        }
+        catch (PersistenciaException e)
+        {
+            System.out.println("ERROR al guardar: " + e.getMessage());
         }
     }
 }

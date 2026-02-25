@@ -1,10 +1,13 @@
 package Logica.Ventas;
 import Logica.Objetos.CantPostre;
 import java.time.LocalDate;
+import java.io.Serializable;
+
 import Logica.Objetos.SecCantPostres;
 
 
-public class Venta {
+public class Venta implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int numeroVenta;
 	private LocalDate Fecha;
 	private String direccion;

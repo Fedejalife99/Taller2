@@ -1,8 +1,9 @@
 package Logica.Objetos;
 import Logica.Postres.Postre;
+import java.io.Serializable;
 
-public class CantPostre {
-	
+public class CantPostre implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Postre postre;
 	private int cantidad;
 	

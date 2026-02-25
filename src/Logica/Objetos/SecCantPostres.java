@@ -1,5 +1,7 @@
 package Logica.Objetos;
 import Logica.Objetos.Exceptions.*;
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import Logica.Objetos.CantPostre;
@@ -7,9 +9,9 @@ import Logica.Objetos.VObjects.VOPostresCant;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SecCantPostres{
+public class SecCantPostres implements Serializable{
 	private ArrayList<CantPostre> ACT;
-	
+	private static final long serialVersionUID = 1L;
 	public SecCantPostres()
 	{
 		this.ACT =  new ArrayList<CantPostre>();

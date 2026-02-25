@@ -1,5 +1,5 @@
 package Logica.Ventas;
-
+import java.io.Serializable;
 
 import Logica.Objetos.VOVenta;
 import Logica.Objetos.TipoIndice;
@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class ColeccionVentas {
+public class ColeccionVentas implements Serializable{
+	private static final long serialVersionUID = 1L;
     private LinkedList<Venta> LPPF;
 
     public ColeccionVentas(){

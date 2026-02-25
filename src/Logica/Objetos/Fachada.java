@@ -1,5 +1,6 @@
 package Logica.Objetos;
 import Logica.Objetos.VObjects.*;
+import Sistema.Persistencia;
 import Logica.Postres.*;
 import Logica.Ventas.*;
 import Logica.Objetos.Exceptions.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fachada {
+	private Persistencia p;
 	private ColeccionPostres postres;
 	private ColeccionVentas ventas;
 	private SecCantPostres secCantPostres;
@@ -16,6 +18,7 @@ public class Fachada {
 	public Fachada() {
 		this.postres = new ColeccionPostres();
 		this.ventas = new ColeccionVentas();
+		this.p = new Persistencia();
 	}
 	public void IngresarPostre(VOPostreIngreso datosPostre) throws PrecioPostreException
 	{
@@ -278,5 +281,18 @@ public class Fachada {
 	    return nuevo;
 	}
 	
+	public void RespaldarDatos() throws PersistenciaException
+	{
+		p.respaldarPostres(postres);
+		p.respaldarVentas(ventas);
+	}
 	
+	public void RecuperarDatos() throws PersistenciaException
+	{
+		   
+		    postres = p.recuperarPostres();
+		    ventas = p.recuperarVentas();
+		   
+	}
 }
+	
