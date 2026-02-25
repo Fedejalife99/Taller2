@@ -8,3 +8,4 @@
 /PrecioPostreException.class
 /VentaFinalizadaException.class
 /VentaNoExisteException.class
+/PersistenciaException.class

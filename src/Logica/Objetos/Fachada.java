@@ -4,6 +4,7 @@ import Sistema.Persistencia;
 import Logica.Postres.*;
 import Logica.Ventas.*;
 import Logica.Objetos.Exceptions.*;
+import Logica.Objetos.VObjects.VOPersistencia;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -281,18 +282,16 @@ public class Fachada {
 	    return nuevo;
 	}
 	
-	public void RespaldarDatos() throws PersistenciaException
+	public void RespaldarDatos(VOPersistencia VOP) throws PersistenciaException
 	{
-		p.respaldarPostres(postres);
-		p.respaldarVentas(ventas);
+		p.respaldarColecciones(VOP);
 	}
 	
-	public void RecuperarDatos() throws PersistenciaException
+	public VOPersistencia RecuperarDatos() throws PersistenciaException
 	{
 		   
-		    postres = p.recuperarPostres();
-		    ventas = p.recuperarVentas();
-		   
+		return p.recuperarColecciones();
+
 	}
 }
 	
