@@ -91,7 +91,16 @@ public class ColeccionVentas implements Serializable{
     
     public void eliminarVenta(int numVenta)
     {
-    	LPPF.remove(numVenta - 1);
+    	Venta aux = null;
+    	int i = 0;
+        for (Venta v : LPPF) { 
+            if (v.getNumeroVenta() == numVenta) {
+                aux = v;
+                break;
+            }
+            i++;
+        }
+    	LPPF.remove(i);
     }
 
 }

@@ -8,7 +8,7 @@ public class ConfigProperties {
 
     public ConfigProperties() throws IOException {
         propiedades = new Properties();
-        try (FileInputStream fis = new FileInputStream("./.properties")) 
+        try (FileInputStream fis = new FileInputStream("src/.properties")) 
         {
             propiedades.load(fis);
         }

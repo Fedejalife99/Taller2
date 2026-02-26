@@ -264,6 +264,7 @@ public class Fachada {
 									 }
 									 encontre=true;
 								 }
+								 i++;
 								 
 							 }
 					}
