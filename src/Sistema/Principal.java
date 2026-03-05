@@ -4,6 +4,8 @@ import Logica.Objetos.TipoIndice;
 import Logica.Objetos.VOVenta;
 import Logica.Objetos.VObjects.*;
 import Logica.Objetos.Exceptions.*;
+
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,12 +13,12 @@ public class Principal
 {
     private Fachada f;
 
-    public Principal() throws PersistenciaException
+    public Principal() throws PersistenciaException,  RemoteException
     {
         this.f = new Fachada();
     }
 
-    public static void main(String[] args) throws InterruptedException
+    public static void main(String[] args) throws InterruptedException, RemoteException
     {
         Principal p = null;
         try

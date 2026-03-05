@@ -8,7 +8,7 @@ public class ConfigProperties {
 
     public ConfigProperties() throws IOException {
         propiedades = new Properties();
-        try (FileInputStream fis = new FileInputStream("src/.properties")) 
+        try (FileInputStream fis = new FileInputStream("./.properties")) 
         {
             propiedades.load(fis);
         }
@@ -20,11 +20,11 @@ public class ConfigProperties {
     }
     public String getIpServidor() 
     {
-        return propiedades.getProperty("ipServidor");
+        return propiedades.getProperty("ipservidor");
     }
 
     public String getPuertoServidor() 
     {
-        return propiedades.getProperty("puertoServidor");
+        return propiedades.getProperty("puerto");
     }
 }

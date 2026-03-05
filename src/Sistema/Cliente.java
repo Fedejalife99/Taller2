@@ -1,5 +1,6 @@
 package Sistema;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -12,11 +13,12 @@ import Logica.Objetos.VObjects.VOPostreIngreso;
 import Logica.Objetos.VObjects.VOPostreLightIngreso;
 
 public class Cliente {
-	public static void main(String [] args) throws PrecioPostreException, CodigoExistenteException, InterruptedException
+	public static void main(String [] args) throws PrecioPostreException, CodigoExistenteException, InterruptedException, IOException
 	{
 		try
 		{
 			ConfigProperties config = new ConfigProperties();
+			System.out.println(config.getPuertoServidor());
             int puerto = Integer.parseInt(config.getPuertoServidor());
             String ip = config.getIpServidor();
             

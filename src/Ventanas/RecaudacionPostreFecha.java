@@ -1,0 +1,84 @@
+package Ventanas;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+
+import java.awt.Label;
+import java.awt.TextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+public class RecaudacionPostreFecha {
+
+	private JFrame frame;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					RecaudacionPostreFecha window = new RecaudacionPostreFecha();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public RecaudacionPostreFecha() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 413);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		Label label = new Label("Recaudación postre fecha");
+		label.setBounds(10, 10, 157, 22);
+		frame.getContentPane().add(label);
+		
+		Label label_1 = new Label("Código de postre: ");
+		label_1.setBounds(10, 38, 119, 22);
+		frame.getContentPane().add(label_1);
+		
+		TextField textField = new TextField();
+		textField.setBounds(10, 66, 414, 22);
+		frame.getContentPane().add(textField);
+		
+		JSpinner spinnerFecha = new JSpinner(new SpinnerDateModel());
+		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerFecha, "dd/MM/yyyy");
+		spinnerFecha.setEditor(editor);
+		spinnerFecha.setBounds(10, 134, 414, 36);
+		frame.getContentPane().add(spinnerFecha);
+		
+		JLabel lblNewLabel = new JLabel("Fecha:");
+		lblNewLabel.setBounds(10, 106, 46, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Consultar");
+		btnNewButton.setBounds(10, 193, 103, 36);
+		frame.getContentPane().add(btnNewButton);
+		
+		textField_1 = new JTextField();
+		textField_1.setEditable(false);
+		textField_1.setBounds(10, 240, 414, 123);
+		frame.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+	}
+}

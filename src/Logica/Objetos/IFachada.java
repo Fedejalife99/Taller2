@@ -1,3 +1,4 @@
+package Logica.Objetos;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
