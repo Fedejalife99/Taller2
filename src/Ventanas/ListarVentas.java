@@ -1,87 +1,147 @@
 package Ventanas;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
-import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import Controladores.ControladorListarVentas;
+import Logica.Objetos.IFachada;
+import Logica.Objetos.TipoIndice;
+import Logica.Objetos.Exceptions.ErrorIndiceException;
+import Logica.Objetos.VOVenta;
 
 public class ListarVentas {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTable table;
+	private JRadioButton rdbtnTodas;
+	private JRadioButton rdbtnEnProceso;
+	private JRadioButton rdbtnFinalizadas;
+	private ControladorListarVentas controlador;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListarVentas window = new ListarVentas();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ListarVentas() {
+	public ListarVentas(IFachada fachada) {
+		this.controlador = new ControladorListarVentas(fachada);
 		initialize();
+		cargarTabla();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(35, 42, 64));
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 574, 520);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Lista de ventas");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(10, 11, 84, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Todas");
-		rdbtnNewRadioButton.setBackground(new Color(35, 42, 64));
-		rdbtnNewRadioButton.setForeground(new Color(255, 255, 255));
-		rdbtnNewRadioButton.setBounds(6, 32, 73, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton);
-		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("En proceso");
-		rdbtnNewRadioButton_1.setForeground(new Color(255, 255, 255));
-		rdbtnNewRadioButton_1.setBackground(new Color(35, 42, 64));
-		rdbtnNewRadioButton_1.setBounds(81, 32, 95, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
-		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Finalizadas");
-		rdbtnNewRadioButton_2.setForeground(new Color(255, 255, 255));
-		rdbtnNewRadioButton_2.setBackground(new Color(35, 42, 64));
-		rdbtnNewRadioButton_2.setBounds(178, 32, 109, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_2);
-		
-		JButton btnNewButton = new JButton("Listar");
-		btnNewButton.setBackground(new Color(32, 90, 140));
-		btnNewButton.setBounds(10, 62, 89, 23);
-		frame.getContentPane().add(btnNewButton);
-		
-		table = new JTable();
-		table.setBackground(new Color(32, 90, 140));
-		table.setForeground(new Color(32, 90, 140));
-		table.setBounds(10, 96, 414, 154);
-		frame.getContentPane().add(table);
+
+		JLabel lblTitulo = new JLabel("Listado de ventas");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitulo.setBounds(10, 11, 200, 14);
+		frame.getContentPane().add(lblTitulo);
+
+		// Radio buttons para TipoIndice
+		rdbtnTodas = new JRadioButton("Todas");
+		rdbtnTodas.setBackground(new Color(35, 42, 64));
+		rdbtnTodas.setForeground(Color.WHITE);
+		rdbtnTodas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rdbtnTodas.setSelected(true);
+		rdbtnTodas.setBounds(10, 36, 80, 20);
+		frame.getContentPane().add(rdbtnTodas);
+
+		rdbtnEnProceso = new JRadioButton("En proceso");
+		rdbtnEnProceso.setBackground(new Color(35, 42, 64));
+		rdbtnEnProceso.setForeground(Color.WHITE);
+		rdbtnEnProceso.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rdbtnEnProceso.setBounds(100, 36, 100, 20);
+		frame.getContentPane().add(rdbtnEnProceso);
+
+		rdbtnFinalizadas = new JRadioButton("Finalizadas");
+		rdbtnFinalizadas.setBackground(new Color(35, 42, 64));
+		rdbtnFinalizadas.setForeground(Color.WHITE);
+		rdbtnFinalizadas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rdbtnFinalizadas.setBounds(210, 36, 110, 20);
+		frame.getContentPane().add(rdbtnFinalizadas);
+
+		ButtonGroup grupo = new ButtonGroup();
+		grupo.add(rdbtnTodas);
+		grupo.add(rdbtnEnProceso);
+		grupo.add(rdbtnFinalizadas);
+
+		DefaultTableModel modelo = new DefaultTableModel(
+			new String[]{"Número de venta", "Monto total", "Finalizado"}, 0
+		) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		table = new JTable(modelo);
+		table.setBackground(Color.WHITE);
+		table.setForeground(new Color(35, 42, 64));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.getTableHeader().setBackground(new Color(32, 90, 140));
+		table.getTableHeader().setForeground(Color.WHITE);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(10, 65, 538, 350);
+		frame.getContentPane().add(scrollPane);
+
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBackground(new Color(32, 90, 140));
+		btnBuscar.setForeground(Color.WHITE);
+		btnBuscar.setOpaque(true);
+		btnBuscar.setBorderPainted(false);
+		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnBuscar.setBounds(10, 430, 120, 30);
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarTabla();
+			}
+		});
+		frame.getContentPane().add(btnBuscar);
 	}
 
+	private void cargarTabla() {
+		TipoIndice tipo;
+		if (rdbtnEnProceso.isSelected()) {
+			tipo = TipoIndice.P;
+		} else if (rdbtnFinalizadas.isSelected()) {
+			tipo = TipoIndice.F;
+		} else {
+			tipo = TipoIndice.T;
+		}
+
+		try {
+			List<VOVenta> ventas = controlador.listarVentas(tipo);
+			DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+			modelo.setRowCount(0);
+
+			for (VOVenta v : ventas) {
+				modelo.addRow(new Object[]{
+					v.getNumeroVenta(),
+					v.getMontoTotal(),
+					v.isFinalizado() ? "Sí" : "No"
+				});
+			}
+		} catch (ErrorIndiceException e) {
+			JOptionPane.showMessageDialog(frame, "Error al obtener las ventas.", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
+	}
 }

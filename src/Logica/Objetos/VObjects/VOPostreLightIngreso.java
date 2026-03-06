@@ -1,6 +1,8 @@
 package Logica.Objetos.VObjects;
 
-public class VOPostreLightIngreso extends VOPostreIngreso{
+import java.io.Serializable;
+
+public class VOPostreLightIngreso extends VOPostreIngreso implements Serializable{
 	private String endulzante;
 	private String descripcion;
 	

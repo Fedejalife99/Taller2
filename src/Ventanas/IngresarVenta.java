@@ -1,95 +1,123 @@
 package Ventanas;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+
+import Controladores.ControladorIngresarVenta;
+import Logica.Objetos.IFachada;
 
 public class IngresarVenta {
 
-	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	JFrame frame;
+	private JTextField txtDireccion;
+	private JSpinner spinnerFecha;
+	private ControladorIngresarVenta controlador;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IngresarVenta window = new IngresarVenta();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public IngresarVenta() {
+	public IngresarVenta(IFachada fachada) {
+		this.controlador = new ControladorIngresarVenta(fachada);
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(35, 42, 64));
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 450, 280);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Ingresar venta");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(10, 11, 110, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Dirección de entrega");
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setBounds(10, 55, 110, 14);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setBounds(10, 78, 301, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Fecha de entrega");
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(10, 109, 110, 14);
-		frame.getContentPane().add(lblNewLabel_2);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(10, 134, 301, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Ingresar");
-		btnNewButton.setBackground(new Color(32, 90, 140));
-		btnNewButton.setForeground(new Color(32, 90, 140));
-		btnNewButton.setBounds(10, 177, 89, 23);
-		frame.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.setBackground(new Color(32, 90, 140));
-		btnNewButton_1.addActionListener(new ActionListener() {
+
+		JLabel lblTitulo = new JLabel("Ingresar venta");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTitulo.setBounds(10, 11, 200, 20);
+		frame.getContentPane().add(lblTitulo);
+
+		JLabel lblDireccion = new JLabel("Dirección:");
+		lblDireccion.setForeground(Color.WHITE);
+		lblDireccion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblDireccion.setBounds(10, 55, 80, 20);
+		frame.getContentPane().add(lblDireccion);
+
+		txtDireccion = new JTextField();
+		txtDireccion.setBounds(100, 52, 310, 25);
+		frame.getContentPane().add(txtDireccion);
+
+		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setForeground(Color.WHITE);
+		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblFecha.setBounds(10, 100, 80, 20);
+		frame.getContentPane().add(lblFecha);
+
+		// SpinnerDateModel para seleccionar fecha
+		spinnerFecha = new JSpinner(new SpinnerDateModel());
+		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerFecha, "dd/MM/yyyy");
+		spinnerFecha.setEditor(editor);
+		spinnerFecha.setBounds(100, 97, 150, 25);
+		frame.getContentPane().add(spinnerFecha);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setBackground(new Color(32, 90, 140));
+		btnConfirmar.setForeground(Color.WHITE);
+		btnConfirmar.setOpaque(true);
+		btnConfirmar.setBorderPainted(false);
+		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnConfirmar.setBounds(100, 155, 120, 30);
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Convertir Date del spinner a LocalDate
+				Date fechaSeleccionada = (Date) spinnerFecha.getValue();
+				LocalDate fecha = fechaSeleccionada.toInstant()
+						.atZone(ZoneId.systemDefault())
+						.toLocalDate();
+
+				String resultado = controlador.ingresarVenta(
+					txtDireccion.getText().trim(),
+					fecha
+				);
+
+				if (resultado.equals("ok")) {
+					JOptionPane.showMessageDialog(frame, "Venta ingresada correctamente.");
+					limpiarCampos();
+				} else {
+					JOptionPane.showMessageDialog(frame, resultado, "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		btnNewButton_1.setBounds(109, 177, 89, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		frame.getContentPane().add(btnConfirmar);
+
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBackground(new Color(32, 90, 140));
+		btnLimpiar.setForeground(Color.WHITE);
+		btnLimpiar.setOpaque(true);
+		btnLimpiar.setBorderPainted(false);
+		btnLimpiar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLimpiar.setBounds(240, 155, 120, 30);
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiarCampos();
+			}
+		});
+		frame.getContentPane().add(btnLimpiar);
 	}
 
+	private void limpiarCampos() {
+		txtDireccion.setText("");
+		spinnerFecha.setValue(new Date());
+	}
+
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
+	}
 }

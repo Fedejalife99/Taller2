@@ -1,6 +1,8 @@
 package Logica.Objetos.VObjects;
 
-public class VOPostreIngreso {
+import java.io.Serializable;
+
+public class VOPostreIngreso implements Serializable{
 	private String codigo;
 	private String nombre;
 	private double precioUnitario;

@@ -1,4 +1,5 @@
 package Logica.Objetos;
+import java.io.FileNotFoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public interface IFachada extends Remote
     
     public VOPostreGeneral listarPostreDetallado(String codigo) throws RemoteException, PostreNoExisteException, InterruptedException;
     
-    public void IngresarVenta(VOVentaIngreso v) throws RemoteException, ErrorFechaException, InterruptedException;
+    public void IngresarVenta(VOVentaIngreso v) throws RemoteException, ErrorFechaException, InterruptedException, FechaInvalidaException;
     
     public void agregarPostreVenta(String codigoPostre, int cantUnidades, int numVenta) throws RemoteException, PostreNoExisteException, VentaNoExisteException, CantidadUnidadesException, VentaFinalizadaException, InterruptedException;
     
@@ -46,5 +47,5 @@ public interface IFachada extends Remote
     
     public void RespaldarDatos() throws RemoteException, PersistenciaException, InterruptedException;
     
-    public void RecuperarDatos() throws RemoteException, InterruptedException;
+    public void RecuperarDatos() throws RemoteException, InterruptedException, FileNotFoundException;
 }

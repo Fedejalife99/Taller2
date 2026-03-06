@@ -1,33 +1,21 @@
 package Ventanas;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import Logica.Objetos.IFachada;
 
 public class MenuPrincipal {
-	private JFrame frame;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuPrincipal window = new MenuPrincipal();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	JFrame frame;
+	private IFachada fachada;
 
-	public MenuPrincipal() {
+	public MenuPrincipal(IFachada fachada) {
+		this.fachada = fachada;
 		initialize();
 	}
 
@@ -38,108 +26,154 @@ public class MenuPrincipal {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btnNewButton = new JButton("Recaudacion por fecha");
-		btnNewButton.setOpaque(true);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setBackground(new Color(32, 90, 140));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnIngresarPostre = new JButton("Ingresar postre");
+		btnIngresarPostre.setOpaque(true);
+		btnIngresarPostre.setBorderPainted(false);
+		btnIngresarPostre.setBackground(new Color(32, 90, 140));
+		btnIngresarPostre.setForeground(Color.WHITE);
+		btnIngresarPostre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				IngresarPostre ventana = new IngresarPostre(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
+		frame.getContentPane().add(btnIngresarPostre);
 
-		JButton btnNewButton_3 = new JButton("Ingresar postre");
-		btnNewButton_3.setOpaque(true);
-		btnNewButton_3.setBorderPainted(false);
-		btnNewButton_3.setBackground(new Color(32, 90, 140));
-		btnNewButton_3.setForeground(Color.WHITE);
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnNuevaVenta = new JButton("Nueva venta");
+		btnNuevaVenta.setOpaque(true);
+		btnNuevaVenta.setBorderPainted(false);
+		btnNuevaVenta.setBackground(new Color(32, 90, 140));
+		btnNuevaVenta.setForeground(Color.WHITE);
+		btnNuevaVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				IngresarVenta ventana = new IngresarVenta(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_3);
+		frame.getContentPane().add(btnNuevaVenta);
 
-		JButton btnNewButton_4 = new JButton("Nueva venta");
-		btnNewButton_4.setOpaque(true);
-		btnNewButton_4.setBorderPainted(false);
-		btnNewButton_4.setBackground(new Color(32, 90, 140));
-		btnNewButton_4.setForeground(Color.WHITE);
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnDetallePostre = new JButton("Detalle postre");
+		btnDetallePostre.setOpaque(true);
+		btnDetallePostre.setBorderPainted(false);
+		btnDetallePostre.setBackground(new Color(32, 90, 140));
+		btnDetallePostre.setForeground(Color.WHITE);
+		btnDetallePostre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DetallePostre ventana = new DetallePostre(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_4);
+		frame.getContentPane().add(btnDetallePostre);
 
-		JButton btnNewButton_2 = new JButton("Detalle postre");
-		btnNewButton_2.setOpaque(true);
-		btnNewButton_2.setBorderPainted(false);
-		btnNewButton_2.setBackground(new Color(32, 90, 140));
-		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnListarPostres = new JButton("Listar postres");
+		btnListarPostres.setOpaque(true);
+		btnListarPostres.setBorderPainted(false);
+		btnListarPostres.setBackground(new Color(32, 90, 140));
+		btnListarPostres.setForeground(Color.WHITE);
+		btnListarPostres.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarPostres ventana = new ListarPostres(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_2);
+		frame.getContentPane().add(btnListarPostres);
 
-		JButton btnNewButton_1 = new JButton("Listar postres");
-		btnNewButton_1.setOpaque(true);
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBackground(new Color(32, 90, 140));
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnAgregarPostreVenta = new JButton("Agregar postre a venta");
+		btnAgregarPostreVenta.setOpaque(true);
+		btnAgregarPostreVenta.setBorderPainted(false);
+		btnAgregarPostreVenta.setBackground(new Color(32, 90, 140));
+		btnAgregarPostreVenta.setForeground(Color.WHITE);
+		btnAgregarPostreVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarPostreVenta ventana = new AgregarPostreVenta(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_1);
+		frame.getContentPane().add(btnAgregarPostreVenta);
 
-		JButton btnNewButton_7 = new JButton("Agregar postre a venta");
-		btnNewButton_7.setOpaque(true);
-		btnNewButton_7.setBorderPainted(false);
-		btnNewButton_7.setBackground(new Color(32, 90, 140));
-		btnNewButton_7.setForeground(Color.WHITE);
-		frame.getContentPane().add(btnNewButton_7);
-
-		JButton btnNewButton_8 = new JButton("Eliminar postres de Venta");
-		btnNewButton_8.setOpaque(true);
-		btnNewButton_8.setBorderPainted(false);
-		btnNewButton_8.setBackground(new Color(32, 90, 140));
-		btnNewButton_8.setForeground(Color.WHITE);
-		frame.getContentPane().add(btnNewButton_8);
-
-		JButton btnNewButton_5 = new JButton("Finalizar Venta");
-		btnNewButton_5.setOpaque(true);
-		btnNewButton_5.setBorderPainted(false);
-		btnNewButton_5.setBackground(new Color(32, 90, 140));
-		btnNewButton_5.setForeground(Color.WHITE);
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnEliminarPostresVenta = new JButton("Eliminar postres de Venta");
+		btnEliminarPostresVenta.setOpaque(true);
+		btnEliminarPostresVenta.setBorderPainted(false);
+		btnEliminarPostresVenta.setBackground(new Color(32, 90, 140));
+		btnEliminarPostresVenta.setForeground(Color.WHITE);
+		btnEliminarPostresVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EliminarPostresVenta ventana = new EliminarPostresVenta(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_5);
+		frame.getContentPane().add(btnEliminarPostresVenta);
 
-		JButton btnNewButton_6 = new JButton("Listar ventas");
-		btnNewButton_6.setOpaque(true);
-		btnNewButton_6.setBorderPainted(false);
-		btnNewButton_6.setBackground(new Color(32, 90, 140));
-		btnNewButton_6.setForeground(Color.WHITE);
-		btnNewButton_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnFinalizarVenta = new JButton("Finalizar Venta");
+		btnFinalizarVenta.setOpaque(true);
+		btnFinalizarVenta.setBorderPainted(false);
+		btnFinalizarVenta.setBackground(new Color(32, 90, 140));
+		btnFinalizarVenta.setForeground(Color.WHITE);
+		btnFinalizarVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FinalizarVenta ventana = new FinalizarVenta(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_6);
-		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(btnFinalizarVenta);
 
-		JButton btnNewButton_9 = new JButton("Respaldar datos");
-		btnNewButton_9.setOpaque(true);
-		btnNewButton_9.setBorderPainted(false);
-		btnNewButton_9.setBackground(new Color(32, 90, 140));
-		btnNewButton_9.setForeground(Color.WHITE);
-		btnNewButton_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnListarVentas = new JButton("Listar ventas");
+		btnListarVentas.setOpaque(true);
+		btnListarVentas.setBorderPainted(false);
+		btnListarVentas.setBackground(new Color(32, 90, 140));
+		btnListarVentas.setForeground(Color.WHITE);
+		btnListarVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarVentas ventana = new ListarVentas(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_9);
+		frame.getContentPane().add(btnListarVentas);
 
-		JButton btnNewButton_10 = new JButton("Postres de una venta");
-		btnNewButton_10.setOpaque(true);
-		btnNewButton_10.setBorderPainted(false);
-		btnNewButton_10.setBackground(new Color(32, 90, 140));
-		btnNewButton_10.setForeground(Color.WHITE);
-		btnNewButton_10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+		JButton btnPostresDeVenta = new JButton("Postres de una venta");
+		btnPostresDeVenta.setOpaque(true);
+		btnPostresDeVenta.setBorderPainted(false);
+		btnPostresDeVenta.setBackground(new Color(32, 90, 140));
+		btnPostresDeVenta.setForeground(Color.WHITE);
+		btnPostresDeVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PostresDeVenta ventana = new PostresDeVenta(fachada);
+				ventana.frame.setVisible(true);
+			}
 		});
-		frame.getContentPane().add(btnNewButton_10);
+		frame.getContentPane().add(btnPostresDeVenta);
+
+		JButton btnRecaudacion = new JButton("Recaudacion por fecha");
+		btnRecaudacion.setOpaque(true);
+		btnRecaudacion.setBorderPainted(false);
+		btnRecaudacion.setBackground(new Color(32, 90, 140));
+		btnRecaudacion.setForeground(Color.WHITE);
+		btnRecaudacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RecaudacionPostreFecha ventana = new RecaudacionPostreFecha(fachada);
+				ventana.frame.setVisible(true);
+			}
+		});
+		frame.getContentPane().add(btnRecaudacion);
+
+		JButton btnRespaldarDatos = new JButton("Respaldar datos");
+		btnRespaldarDatos.setOpaque(true);
+		btnRespaldarDatos.setBorderPainted(false);
+		btnRespaldarDatos.setBackground(new Color(32, 90, 140));
+		btnRespaldarDatos.setForeground(Color.WHITE);
+		btnRespaldarDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					fachada.RespaldarDatos();
+					javax.swing.JOptionPane.showMessageDialog(frame, "Datos respaldados correctamente.");
+				} catch (Exception ex) {
+					javax.swing.JOptionPane.showMessageDialog(frame, "Error al respaldar: " + ex.getMessage());
+				}
+			}
+		});
+		frame.getContentPane().add(btnRespaldarDatos);
+	}
+	public void setVisible(boolean visible) {
+	    frame.setVisible(visible);
 	}
 }

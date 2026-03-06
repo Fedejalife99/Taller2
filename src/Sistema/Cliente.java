@@ -1,50 +1,36 @@
 package Sistema;
 
-import java.io.IOException;
+import java.awt.EventQueue;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 import Logica.Objetos.IFachada;
-import Logica.Objetos.Exceptions.CodigoExistenteException;
-import Logica.Objetos.Exceptions.PrecioPostreException;
-import Logica.Objetos.VObjects.VOPostreIngreso;
-import Logica.Objetos.VObjects.VOPostreLightIngreso;
+import Ventanas.MenuPrincipal;
 
 public class Cliente {
-	public static void main(String [] args) throws PrecioPostreException, CodigoExistenteException, InterruptedException, IOException
-	{
-		try
-		{
+	public static void main(String[] args) {
+		try {
 			ConfigProperties config = new ConfigProperties();
-			System.out.println(config.getPuertoServidor());
-            int puerto = Integer.parseInt(config.getPuertoServidor());
-            String ip = config.getIpServidor();
-            
+			int puerto = Integer.parseInt(config.getPuertoServidor());
+			String ip = config.getIpServidor();
+
+			// Obtiene la referencia remota a la fachada via RMI
 			IFachada fachada = (IFachada) Naming.lookup("//" + ip + ":" + puerto + "/fachada");
-			
-			 System.out.println("\n[1] Ingresando postre común...");
-	            VOPostreIngreso postre1 = new VOPostreIngreso("P-001", "Tiramisú", 250.0);
-	            fachada.IngresarPostre(postre1);
-	            System.out.println("    ✔ Postre común ingresado: " + postre1.getCodigo());
-	            
-	            System.out.println("\n[2] Ingresando postre light...");
-	            VOPostreLightIngreso postre2 = new VOPostreLightIngreso(
-	                "P-002", "Gelatina Stevia", 180.0, "Stevia", "Sin azúcar, apto diabéticos"
-	            );
+
+			// Abre el menú principal pasándole la interfaz
+			EventQueue.invokeLater(() -> {
+				MenuPrincipal menu = new MenuPrincipal(fachada);
+				menu.setVisible(true);
+			});
+
+		}catch (NotBoundException e) {
+			System.err.println("Objeto no publicado: " + e.getMessage());
+		} catch (RemoteException e) {
+			System.err.println("Error remoto: " + e.getMessage());
+		} catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
 		}
-        catch (MalformedURLException e)
-		{ 
-        	System.err.println("URL mal formada: "   + e.getMessage());
-        }
-        catch (NotBoundException e)
-		{
-        	System.err.println("Objeto no publicado: " + e.getMessage());
-        }
-        catch (RemoteException e)
-		{
-        	System.err.println("Error remoto: "  + e.getMessage());
-        }
 	}
 }

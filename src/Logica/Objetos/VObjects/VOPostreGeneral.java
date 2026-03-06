@@ -1,7 +1,9 @@
 package Logica.Objetos.VObjects;
+import java.io.Serializable;
+
 import Logica.Objetos.TipoPostre;
 
-public class VOPostreGeneral {
+public class VOPostreGeneral implements Serializable{
 	private String codigo;
 	private String nombre;
 	private double precioUnitario;

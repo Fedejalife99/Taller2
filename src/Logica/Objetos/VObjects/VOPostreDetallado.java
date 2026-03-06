@@ -1,7 +1,9 @@
 package Logica.Objetos.VObjects;
+import java.io.Serializable;
+
 import Logica.Objetos.TipoPostre;
 
-public class VOPostreDetallado extends VOPostreGeneral{
+public class VOPostreDetallado extends VOPostreGeneral implements Serializable{
 	private String endulzante;
 	private String descripcion;
 	public VOPostreDetallado(String codigo, String nombre, double precioUnitario, TipoPostre tipoPostre,

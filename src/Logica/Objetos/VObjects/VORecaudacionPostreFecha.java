@@ -1,6 +1,8 @@
 package Logica.Objetos.VObjects;
 
-public class VORecaudacionPostreFecha {
+import java.io.Serializable;
+
+public class VORecaudacionPostreFecha implements Serializable{
 	private double montoTotal;
 	private int cantidadTotal;
 	

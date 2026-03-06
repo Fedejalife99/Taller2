@@ -1,63 +1,106 @@
 package Ventanas;
 
 import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import javax.swing.JLabel;
-import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import Controladores.ControladorListarPostres;
+import Logica.Objetos.IFachada;
+import Logica.Objetos.Exceptions.NoHayPostresException;
+import Logica.Objetos.VObjects.VOPostreGeneral;
 
 public class ListarPostres {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTable table;
-	private JLabel lblNewLabel;
+	private ControladorListarPostres controlador;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListarPostres window = new ListarPostres();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ListarPostres() {
+	public ListarPostres(IFachada fachada) {
+		this.controlador = new ControladorListarPostres(fachada);
 		initialize();
+		cargarTabla();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(35, 42, 64));
 		frame.setBounds(100, 100, 574, 472);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 31, 538, 260);
+
+		JLabel lblTitulo = new JLabel("Listado de postres");
+		lblTitulo.setForeground(new Color(255, 255, 255));
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitulo.setBounds(10, 11, 200, 14);
+		frame.getContentPane().add(lblTitulo);
+
+		// Modelo de tabla con columnas definidas y no editable
+		DefaultTableModel modelo = new DefaultTableModel(
+			new String[]{"Código", "Nombre", "Precio", "Tipo"}, 0
+		) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		table = new JTable(modelo);
+		table.setBackground(new Color(255, 255, 255));
+		table.setForeground(new Color(35, 42, 64));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.getTableHeader().setBackground(new Color(32, 90, 140));
+		table.getTableHeader().setForeground(Color.WHITE);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(10, 36, 538, 350);
 		frame.getContentPane().add(scrollPane);
-		
-		table = new JTable();
-		table.setBounds(0, 0, 1, 1);
-		frame.getContentPane().add(table);
-		
-		lblNewLabel = new JLabel("Listado de postres");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(10, 11, 114, 14);
-		frame.getContentPane().add(lblNewLabel);
+
+		JButton btnRefrescar = new JButton("Refrescar");
+		btnRefrescar.setBackground(new Color(32, 90, 140));
+		btnRefrescar.setForeground(Color.WHITE);
+		btnRefrescar.setOpaque(true);
+		btnRefrescar.setBorderPainted(false);
+		btnRefrescar.setBounds(10, 400, 120, 30);
+		btnRefrescar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarTabla();
+			}
+		});
+		frame.getContentPane().add(btnRefrescar);
+	}
+
+	private void cargarTabla() {
+		try {
+			List<VOPostreGeneral> postres = controlador.listarPostres();
+			DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+			modelo.setRowCount(0); // limpiar filas anteriores
+
+			for (VOPostreGeneral p : postres) {
+				modelo.addRow(new Object[]{
+					p.getCodigo(),
+					p.getNombre(),
+					p.getPrecioUnitario(),
+					p.getTipo()
+				});
+			}
+		} catch (NoHayPostresException e) {
+			JOptionPane.showMessageDialog(frame, "No hay postres registrados.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
 	}
 }

@@ -1,111 +1,131 @@
 package Ventanas;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import Controladores.ControladorAgregarPostresVenta;
+import Logica.Objetos.IFachada;
 
 public class AgregarPostreVenta {
 
-	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	JFrame frame;
+	private JTextField txtCodigoVenta;
+	private JTextField txtCodigoPostre;
+	private JTextField txtCantidad;
+	private ControladorAgregarPostresVenta controlador;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarPostreVenta window = new AgregarPostreVenta();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public AgregarPostreVenta() {
+	public AgregarPostreVenta(IFachada fachada) {
+		this.controlador = new ControladorAgregarPostresVenta(fachada);
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(35, 42, 64));
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 450, 320);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Agregar postres a venta");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBackground(new Color(192, 192, 192));
-		lblNewLabel.setBounds(10, 11, 148, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Número de venta:");
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setBackground(new Color(255, 255, 255));
-		lblNewLabel_1.setBounds(10, 36, 97, 14);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		textField = new JTextField();
-		textField.setBounds(10, 61, 414, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Código de postre");
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBackground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(10, 92, 97, 14);
-		frame.getContentPane().add(lblNewLabel_2);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(10, 117, 414, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel_3 = new JLabel("Cantidad de unidades (1 - 40)");
-		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setBackground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(10, 148, 169, 14);
-		frame.getContentPane().add(lblNewLabel_3);
-		
-		JButton btnNewButton = new JButton("Agregar");
-		btnNewButton.addActionListener(new ActionListener() {
+
+		JLabel lblTitulo = new JLabel("Agregar postre a venta");
+		lblTitulo.setForeground(Color.WHITE);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTitulo.setBounds(10, 11, 300, 20);
+		frame.getContentPane().add(lblTitulo);
+
+		JLabel lblCodigoVenta = new JLabel("Cód. venta:");
+		lblCodigoVenta.setForeground(Color.WHITE);
+		lblCodigoVenta.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCodigoVenta.setBounds(10, 55, 90, 20);
+		frame.getContentPane().add(lblCodigoVenta);
+
+		txtCodigoVenta = new JTextField();
+		txtCodigoVenta.setBounds(110, 52, 300, 25);
+		frame.getContentPane().add(txtCodigoVenta);
+
+		JLabel lblCodigoPostre = new JLabel("Cód. postre:");
+		lblCodigoPostre.setForeground(Color.WHITE);
+		lblCodigoPostre.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCodigoPostre.setBounds(10, 100, 90, 20);
+		frame.getContentPane().add(lblCodigoPostre);
+
+		txtCodigoPostre = new JTextField();
+		txtCodigoPostre.setBounds(110, 97, 300, 25);
+		frame.getContentPane().add(txtCodigoPostre);
+
+		JLabel lblCantidad = new JLabel("Cantidad:");
+		lblCantidad.setForeground(Color.WHITE);
+		lblCantidad.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCantidad.setBounds(10, 145, 90, 20);
+		frame.getContentPane().add(lblCantidad);
+
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(110, 142, 300, 25);
+		frame.getContentPane().add(txtCantidad);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setBackground(new Color(32, 90, 140));
+		btnConfirmar.setForeground(Color.WHITE);
+		btnConfirmar.setOpaque(true);
+		btnConfirmar.setBorderPainted(false);
+		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnConfirmar.setBounds(100, 200, 120, 30);
+		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String resultado = controlador.agregarPostreVenta(
+					txtCodigoVenta.getText().trim(),
+					txtCodigoPostre.getText().trim(),
+					txtCantidad.getText().trim()
+				);
+				if (resultado.equals("ok")) {
+					JOptionPane.showMessageDialog(frame, "Postre agregado correctamente.");
+					limpiarCampos();
+				} else {
+					JOptionPane.showMessageDialog(frame, resultado, "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		btnNewButton.setForeground(new Color(32, 90, 140));
-		btnNewButton.setBackground(new Color(32, 90, 140));
-		btnNewButton.setBounds(10, 208, 89, 23);
-		frame.getContentPane().add(btnNewButton);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(10, 173, 414, 20);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.setBounds(109, 208, 89, 23);
-		frame.getContentPane().add(btnNewButton_1);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(424, 92, 2, 2);
-		frame.getContentPane().add(scrollPane);
+		frame.getContentPane().add(btnConfirmar);
+
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBackground(new Color(32, 90, 140));
+		btnLimpiar.setForeground(Color.WHITE);
+		btnLimpiar.setOpaque(true);
+		btnLimpiar.setBorderPainted(false);
+		btnLimpiar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLimpiar.setBounds(240, 200, 120, 30);
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiarCampos();
+			}
+		});
+		frame.getContentPane().add(btnLimpiar);
+	}
+
+	private void limpiarCampos() {
+		txtCodigoVenta.setText("");
+		txtCodigoPostre.setText("");
+		txtCantidad.setText("");
+	}
+
+	public void setVisible(boolean visible) {
+		frame.setVisible(visible);
 	}
 }
+
+
+
+
+
+
+
+
+
+

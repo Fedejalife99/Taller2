@@ -5,6 +5,7 @@ import Sistema.Monitor;
 import java.util.ArrayList;
 import java.util.List;
 import java.rmi.server.UnicastRemoteObject;
+import java.io.FileNotFoundException;
 import java.rmi.RemoteException;
 
 import Logica.Objetos.Exceptions.CantidadUnidadesException;
@@ -396,7 +397,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada{
 		monitor.terminoEscritura();
 	}
 	
-	public void RecuperarDatos()throws RemoteException, InterruptedException
+	public void RecuperarDatos()throws RemoteException, InterruptedException, FileNotFoundException
 	{
 		monitor.comienzoLectura();
 		try
