@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import java.awt.Color;
 
 public class DetallePostre {
 
@@ -43,11 +44,13 @@ public class DetallePostre {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(35, 42, 64));
 		frame.setBounds(100, 100, 528, 380);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Código a buscar:");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(10, 36, 129, 14);
 		frame.getContentPane().add(lblNewLabel);
@@ -58,10 +61,13 @@ public class DetallePostre {
 		textField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Buscar");
+		btnNewButton.setBackground(new Color(32, 90, 140));
 		btnNewButton.setBounds(10, 107, 96, 32);
 		frame.getContentPane().add(btnNewButton);
 		
 		textField_1 = new JTextField();
+		textField_1.setBackground(new Color(32, 90, 140));
+		textField_1.setForeground(new Color(32, 90, 140));
 		textField_1.setEditable(false);
 		textField_1.setBounds(10, 150, 492, 125);
 		frame.getContentPane().add(textField_1);

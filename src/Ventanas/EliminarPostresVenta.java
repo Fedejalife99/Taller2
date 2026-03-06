@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
 
 public class EliminarPostresVenta {
 
@@ -44,6 +46,8 @@ public class EliminarPostresVenta {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setForeground(new Color(255, 255, 255));
+		frame.getContentPane().setBackground(new Color(35, 42, 64));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -54,18 +58,23 @@ public class EliminarPostresVenta {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Eliminar cantidad de postres de la venta");
-		lblNewLabel.setBounds(10, 11, 191, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(10, 11, 282, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Número de venta:");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(10, 42, 137, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Código de postre:");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setBounds(10, 98, 91, 14);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Cantidad a eliminar:");
+		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setBounds(10, 154, 114, 14);
 		frame.getContentPane().add(lblNewLabel_3);
 		
@@ -80,6 +89,7 @@ public class EliminarPostresVenta {
 		textField_2.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Eliminar");
+		btnNewButton.setBackground(new Color(32, 90, 140));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
 
 public class PostresDeVenta {
 
@@ -46,11 +48,13 @@ public class PostresDeVenta {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(35, 42, 64));
 		frame.setBounds(100, 100, 559, 481);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Número de venta:");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(10, 41, 118, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -60,6 +64,8 @@ public class PostresDeVenta {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Listar postres de una venta");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(10, 11, 161, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		

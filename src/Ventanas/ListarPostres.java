@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import java.awt.Color;
 
 public class ListarPostres {
 
@@ -41,6 +42,7 @@ public class ListarPostres {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(35, 42, 64));
 		frame.setBounds(100, 100, 574, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -54,6 +56,7 @@ public class ListarPostres {
 		frame.getContentPane().add(table);
 		
 		lblNewLabel = new JLabel("Listado de postres");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(10, 11, 114, 14);
 		frame.getContentPane().add(lblNewLabel);
 	}

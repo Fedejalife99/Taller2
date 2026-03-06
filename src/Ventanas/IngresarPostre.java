@@ -48,14 +48,14 @@ public class IngresarPostre {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JLabel lblTitulo = new JLabel("Ingresar postre");
-		lblTitulo.setForeground(new Color(0, 128, 192));
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblTitulo.setForeground(new Color(255, 255, 255));
+		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 22));
 		lblTitulo.setBounds(92, 43, 198, 23);
 		frame.getContentPane().add(lblTitulo);
 
 		JLabel lblCodigo = new JLabel("Código:");
-		lblCodigo.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
-		lblCodigo.setForeground(new Color(32, 90, 140));
+		lblCodigo.setFont(new Font("Segoe UI Historic", Font.BOLD, 18));
+		lblCodigo.setForeground(new Color(255, 255, 255));
 		lblCodigo.setBounds(92, 144, 77, 36);
 		frame.getContentPane().add(lblCodigo);
 
@@ -64,8 +64,8 @@ public class IngresarPostre {
 		frame.getContentPane().add(txtCodigo);
 
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setForeground(new Color(32, 90, 140));
-		lblNombre.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
+		lblNombre.setForeground(new Color(255, 255, 255));
+		lblNombre.setFont(new Font("Segoe UI Historic", Font.BOLD, 18));
 		lblNombre.setBounds(92, 234, 77, 36);
 		frame.getContentPane().add(lblNombre);
 
@@ -74,8 +74,8 @@ public class IngresarPostre {
 		frame.getContentPane().add(txtNombre);
 
 		JLabel lblPrecioUnitario = new JLabel("Precio unitario:");
-		lblPrecioUnitario.setForeground(new Color(32, 90, 140));
-		lblPrecioUnitario.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
+		lblPrecioUnitario.setForeground(new Color(255, 255, 255));
+		lblPrecioUnitario.setFont(new Font("Segoe UI Historic", Font.BOLD, 18));
 		lblPrecioUnitario.setBounds(92, 317, 132, 36);
 		frame.getContentPane().add(lblPrecioUnitario);
 
@@ -84,8 +84,8 @@ public class IngresarPostre {
 		frame.getContentPane().add(txtPrecioUnitario);
 
 		JLabel lblTipoPostre = new JLabel("Tipo de postre:");
-		lblTipoPostre.setForeground(new Color(32, 90, 140));
-		lblTipoPostre.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
+		lblTipoPostre.setForeground(new Color(255, 255, 255));
+		lblTipoPostre.setFont(new Font("Segoe UI Historic", Font.BOLD, 18));
 		lblTipoPostre.setBounds(92, 402, 132, 36);
 		frame.getContentPane().add(lblTipoPostre);
 
