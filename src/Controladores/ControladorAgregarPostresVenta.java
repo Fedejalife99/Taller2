@@ -41,8 +41,8 @@ public class ControladorAgregarPostresVenta {
 			return "Error: La cantidad debe ser un número entero.";
 		}
 
-		if (cantidad <= 0 || cantidad >= 40) {
-			return "Error: La cantidad debe ser mayor a 0 y menor a 40.";
+		if (cantidad <= 0 || cantidad > 40) {
+			return "Error: La cantidad debe estar entre 1 y 40.";
 		}
 
 		try {

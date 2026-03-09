@@ -87,16 +87,14 @@ public class Fachada extends UnicastRemoteObject implements IFachada{
 	public List<VOPostreGeneral> listarPostresGral() throws RemoteException, NoHayPostresException, InterruptedException
 	{
 		monitor.comienzoLectura();
-		if(postres.listarPostresGeneral() == null)
+		List<VOPostreGeneral> lista = postres.listarPostresGeneral();
+		if(lista == null || lista.isEmpty())
 		{
 			monitor.terminoLectura();
 			throw new NoHayPostresException("No hay postres registrados.");
 		}
-		else
-		{	
-			monitor.terminoLectura();
-			return postres.listarPostresGeneral();
-		}		
+		monitor.terminoLectura();
+		return lista;
 	}
 	
 	public VOPostreGeneral listarPostreDetallado(String codigo) throws RemoteException, PostreNoExisteException, InterruptedException
@@ -183,9 +181,8 @@ public class Fachada extends UnicastRemoteObject implements IFachada{
 		if (aux.existePostreEnVenta(codigoPostre)) {
 
 		    if (nuevoTotal > 40) {
-		        aux.setCantidadPostre(codigoPostre, 40);
 		        monitor.terminoEscritura();
-		        throw new CantidadUnidadesException("Se limitó la cantidad total a 40 unidades.");
+		        throw new CantidadUnidadesException("No se pueden superar 40 unidades en una venta.");
 		    }
 
 		    aux.setCantidadPostre(codigoPostre, nuevoTotal);
@@ -226,7 +223,7 @@ public class Fachada extends UnicastRemoteObject implements IFachada{
 			}
 			else
 			{
-				if(cant < 0)
+				if(cant <= 0)
 				{
 					monitor.terminoEscritura();
 					throw new CantidadUnidadesException("La cantidad a eliminar debe ser mayor a 0.");

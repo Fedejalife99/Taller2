@@ -1,6 +1,5 @@
 package Ventanas;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -133,6 +132,7 @@ public class IngresarPostre {
 					txtNombre.getText(),
 					txtPrecioUnitario.getText(),
 					rdbtnLight.isSelected(),
+					rdbtnComun.isSelected(),
 					txtEndulzante.getText(),
 					txtDescripcion.getText()
 				);

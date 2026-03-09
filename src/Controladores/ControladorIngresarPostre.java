@@ -14,22 +14,24 @@ public class ControladorIngresarPostre {
 		this.fachada = fachada;
 	}
 
-	public String ingresarPostre(String codigo, String nombre, String precioStr, boolean esLight, String endulzante, String descripcion) {
+	public String ingresarPostre(String codigo, String nombre, String precioStr, boolean esLight, boolean esComun, String endulzante, String descripcion) {
 		
-		// Validar que los campos obligatorios no estén vacíos
 		if (codigo.isBlank() || nombre.isBlank() || precioStr.isBlank()) {
 			return "Error: Código, nombre y precio son obligatorios.";
 		}
 		
-		// Validar que el precio sea un número
+		if (!esLight && !esComun) {
+			return "Error: Debe seleccionar el tipo de postre (Común o Light).";
+		}
+		
+		String precioNormalizado = precioStr.trim().replace(',', '.');
 		double precio;
 		try {
-			precio = Double.parseDouble(precioStr);
+			precio = Double.parseDouble(precioNormalizado);
 		} catch (NumberFormatException e) {
-			return "Error: El precio debe ser un número válido.";
+			return "Error: El precio debe ser un número válido (use punto o coma decimal).";
 		}
 
-		// Validar campos de postre light
 		if (esLight && (endulzante.isBlank() || descripcion.isBlank())) {
 			return "Error: Endulzante y descripción son obligatorios para postres Light.";
 		}
