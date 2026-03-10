@@ -13,3 +13,5 @@
 /SecCantPostreVacia.class
 /PostreNoExisteEnSec.class
 /CodigoNoAlfanumerico.class
+/PrecioFormatoException.class
+/TipoPostreException.class

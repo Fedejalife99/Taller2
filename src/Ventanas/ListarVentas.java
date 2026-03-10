@@ -40,7 +40,7 @@ public class ListarVentas {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(35, 42, 64));
-		frame.setBounds(100, 100, 574, 520);
+		frame.setBounds(100, 100, 750, 520);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -50,7 +50,6 @@ public class ListarVentas {
 		lblTitulo.setBounds(10, 11, 200, 14);
 		frame.getContentPane().add(lblTitulo);
 
-		// Radio buttons para TipoIndice
 		rdbtnTodas = new JRadioButton("Todas");
 		rdbtnTodas.setBackground(new Color(35, 42, 64));
 		rdbtnTodas.setForeground(Color.WHITE);
@@ -79,7 +78,7 @@ public class ListarVentas {
 		grupo.add(rdbtnFinalizadas);
 
 		DefaultTableModel modelo = new DefaultTableModel(
-			new String[]{"Número de venta", "Monto total", "Finalizado"}, 0
+			new String[]{"Número de venta", "Fecha", "Dirección", "Monto total", "Finalizado"}, 0
 		) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -94,7 +93,7 @@ public class ListarVentas {
 		table.getTableHeader().setForeground(Color.WHITE);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 65, 538, 350);
+		scrollPane.setBounds(10, 65, 710, 350);
 		frame.getContentPane().add(scrollPane);
 
 		JButton btnBuscar = new JButton("Buscar");
@@ -130,6 +129,8 @@ public class ListarVentas {
 			for (VOVenta v : ventas) {
 				modelo.addRow(new Object[]{
 					v.getNumeroVenta(),
+					v.getFechaVenta(),
+					v.getDireccionEntrega(),
 					v.getMontoTotal(),
 					v.isFinalizado() ? "Sí" : "No"
 				});

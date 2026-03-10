@@ -26,8 +26,8 @@ public class ControladorFinalizarVenta {
 		}
 
 		try {
-			fachada.finalizarVenta(numVenta, cancela);
-			return "ok";
+			double total = fachada.finalizarVenta(numVenta, cancela);
+			return "ok:" + total;
 		} catch (VentaNoExisteException e) {
 			return "Error: No existe una venta con ese número.";
 		} catch (VentaFinalizadaException e) {

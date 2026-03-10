@@ -70,8 +70,9 @@ public class FinalizarVenta {
 					txtNumVenta.getText().trim(),
 					chkCancela.isSelected()
 				);
-				if (resultado.equals("ok")) {
-					JOptionPane.showMessageDialog(frame, "Venta finalizada correctamente.");
+				if (resultado.startsWith("ok:")) {
+					double total = Double.parseDouble(resultado.substring(3));
+					JOptionPane.showMessageDialog(frame, "Venta finalizada correctamente.\nMonto total: $" + total);
 					limpiarCampos();
 				} else {
 					JOptionPane.showMessageDialog(frame, resultado, "Error", JOptionPane.ERROR_MESSAGE);
