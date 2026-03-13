@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.rmi.RemoteException;
+
 import Logica.Objetos.IFachada;
 import Logica.Objetos.Exceptions.PostreNoExisteException;
 import Logica.Objetos.VObjects.VOPostreDetallado;
@@ -21,6 +23,8 @@ public class ControladorPostreDetallado {
 			return fachada.listarPostreDetallado(codigo);
 		} catch (PostreNoExisteException e) {
 			throw new RuntimeException("Error: No existe un postre con ese código.");
+		}catch (RemoteException e) {
+			throw new RuntimeException("Error: No se pudo conectar con el servidor. Verifique que el servidor esté activo.");
 		} catch (Exception e) {
 			throw new RuntimeException("Error: " + e.getMessage());
 		}

@@ -342,8 +342,9 @@ public class Fachada extends UnicastRemoteObject implements IFachada{
 			   for (int i = 0; i < aux.LargoSecuencia(); i++) 
 			   {
 			        CantPostre cp = aux.CantPostreIndice(i);
+			        System.out.println("Indice: " + i + " - Postre: " + cp.getPostre().getNombre() + " - Cantidad: " + cp.getCantidad());
 			        Postre p = cp.getPostre();
-
+			        
 			        VOPostresCant vo = new VOPostresCant(
 			            p.getCodigo(),
 			            p.getNombre(),

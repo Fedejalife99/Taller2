@@ -16,10 +16,8 @@ public class Cliente {
 			int puerto = Integer.parseInt(config.getPuertoServidor());
 			String ip = config.getIpServidor();
 
-			// Obtiene la referencia remota a la fachada via RMI
 			IFachada fachada = (IFachada) Naming.lookup("//" + ip + ":" + puerto + "/fachada");
 
-			// Abre el menú principal pasándole la interfaz
 			EventQueue.invokeLater(() -> {
 				MenuPrincipal menu = new MenuPrincipal(fachada);
 				menu.setVisible(true);

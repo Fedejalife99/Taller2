@@ -1,5 +1,6 @@
 package Controladores;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 
 import Logica.Objetos.IFachada;
@@ -29,6 +30,8 @@ public class ControladorRecaudacionPostreFecha {
 			throw e;
 		} catch (FechaInvalidaException e) {
 			throw e;
+		}catch (RemoteException e) {
+			throw new RuntimeException("Error: No se pudo conectar con el servidor. Verifique que el servidor esté activo.");
 		} catch (Exception e) {
 			throw new RuntimeException("Error: " + e.getMessage());
 		}

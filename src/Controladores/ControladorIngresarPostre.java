@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.rmi.RemoteException;
+
 import Logica.Objetos.IFachada;
 import Logica.Objetos.Exceptions.CodigoExistenteException;
 import Logica.Objetos.Exceptions.PrecioPostreException;
@@ -49,7 +51,9 @@ public class ControladorIngresarPostre {
 			return "Error: El precio debe ser mayor a 0.";
 		} catch (CodigoExistenteException e) {
 			return "Error: Ya existe un postre con ese código.";
-		} catch (Exception e) {
+		}catch (RemoteException e) {
+			throw new RuntimeException("Error: No se pudo conectar con el servidor. Verifique que el servidor esté activo.");
+		}catch (Exception e) {
 			return "Error: " + e.getMessage();
 		}
 	}

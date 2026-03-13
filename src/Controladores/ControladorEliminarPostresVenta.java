@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.rmi.RemoteException;
+
 import Logica.Objetos.IFachada;
 import Logica.Objetos.Exceptions.CantidadUnidadesException;
 import Logica.Objetos.Exceptions.PostreNoExisteException;
@@ -55,7 +57,9 @@ public class ControladorEliminarPostresVenta {
 			return "Error: La cantidad ingresada no es válida.";
 		} catch (VentaFinalizadaException e) {
 			return "Error: No se pueden eliminar postres de una venta ya finalizada.";
-		} catch (Exception e) {
+		}catch (RemoteException e) {
+			throw new RuntimeException("Error: No se pudo conectar con el servidor. Verifique que el servidor esté activo.");
+		}catch (Exception e) {
 			return "Error: " + e.getMessage();
 		}
 	}

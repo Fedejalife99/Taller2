@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.rmi.RemoteException;
+
 import Logica.Objetos.IFachada;
 import Logica.Objetos.Exceptions.VentaFinalizadaException;
 import Logica.Objetos.Exceptions.VentaNoExisteException;
@@ -32,7 +34,9 @@ public class ControladorFinalizarVenta {
 			return "Error: No existe una venta con ese número.";
 		} catch (VentaFinalizadaException e) {
 			return "Error: La venta ya se encuentra finalizada.";
-		} catch (Exception e) {
+		}catch (RemoteException e) {
+			throw new RuntimeException("Error: No se pudo conectar con el servidor. Verifique que el servidor esté activo.");
+		}catch (Exception e) {
 			return "Error: " + e.getMessage();
 		}
 	}

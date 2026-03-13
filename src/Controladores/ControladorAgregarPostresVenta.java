@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.rmi.RemoteException;
+
 import Logica.Objetos.IFachada;
 import Logica.Objetos.Exceptions.CantidadUnidadesException;
 import Logica.Objetos.Exceptions.PostreNoExisteException;
@@ -54,7 +56,10 @@ public class ControladorAgregarPostresVenta {
 			return "Error: No existe un postre con ese código.";
 		} catch (VentaFinalizadaException e) {
 			return "Error: No se pueden agregar postres a una venta ya finalizada.";
-		} catch (Exception e) {
+		}catch (RemoteException e) {
+			throw new RuntimeException("Error: No se pudo conectar con el servidor. Verifique que el servidor esté activo.");
+		}
+		catch (Exception e) {
 			return "Error: " + e.getMessage();
 		}
 	}
